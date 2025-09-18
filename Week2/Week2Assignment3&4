@@ -1,0 +1,106 @@
+Homework Assignment 3 & 4: DONE
+
+Generate test data for credit card applications for different types of cards and conditions
+
+Notes:
+
+- Use ICE POT framework
+- Integrate with API to validate the response
+---------------------------------------------------------------------------------------------
+
+
+Assignment 3:
+
+Context : You are an expert in the credit card applications and has expertise in the payment domain and credit card application processing  
+
+Instructions: Generate test data in tabular format to apply for an credit card application
+
+       -Address should have House No Or appartment number , Postal Code, City Name and State .Use address with in USA.
+      - First Name and Last Name should not be biased on country, race,
+      - Use different range for credit score
+      - Don't bias the test data on any format like  name
+Example
+     JVRao,Michelin, 789,18081 DeerPoint Court, Milton, GA-30040
+
+ Persona: You are an expert Test Data Management Architect with deep knowledge in financial services testing, credit card systems, and enterprise-grade QA practices.
+Output:covering normal, boundary, and negative scenarios. 
+Tone: Clear, professional, structured, and instructional — suitable for QA/Test Automation teams preparing enterprise-ready test data.
+
+
+
+Output
+--------------------------------------------------------------------------------------------
+# Credit Card Application Test Data
+
+## Normal Scenario Test Cases
+
+| Test ID | First Name | Last Name | Credit Score | House/Apt No | Street Address | City | State | Postal Code | Test Purpose |
+|---------|------------|-----------|--------------|--------------|----------------|------|-------|-------------|--------------|
+| TC001 | Sarah | Johnson | 750 | 1234 | Maple Street | Denver | CO | 80205 | Good credit applicant |
+| TC002 | Michael | Chen | 720 | 567 | Oak Avenue | Austin | TX | 78701 | Above average credit |
+| TC003 | Emily | Rodriguez | 680 | Apt 45 | 8900 Pine Road | Seattle | WA | 98101 | Fair credit score |
+| TC004 | David | Patel | 800 | 2156 | Elm Drive | Miami | FL | 33101 | Excellent credit |
+| TC005 | Jessica | Thompson | 700 | Unit 12 | 3478 Cedar Lane | Phoenix | AZ | 85001 | Good credit range |
+| TC006 | Robert | Williams | 740 | 5678 | Birch Boulevard | Chicago | IL | 60601 | Upper good credit |
+| TC007 | Amanda | Kim | 690 | 9012 | Willow Way | Portland | OR | 97201 | Lower good credit |
+| TC008 | Christopher | Brown | 760 | 3456 | Spruce Circle | Atlanta | GA | 30309 | High credit score |
+| TC009 | Maria | Garcia | 710 | 7890 | Aspen Court | Las Vegas | NV | 89101 | Mid-range good credit |
+| TC010 | James | Anderson | 730 | Apt 203 | 4567 Poplar Place | Boston | MA | 02101 | Apartment address |
+
+## Boundary Value Test Cases
+
+| Test ID | First Name | Last Name | Credit Score | House/Apt No | Street Address | City | State | Postal Code | Test Purpose |
+|---------|------------|-----------|--------------|--------------|----------------|------|-------|-------------|--------------|
+| TC011 | Anna | White | 300 | 1 | A Street | X | AK | 99501 | Minimum credit score |
+| TC012 | Benjamin | Black | 850 | 99999 | Very Long Street Name Avenue | Verylongcitynametest | CA | 90210 | Maximum credit score |
+| TC013 | Catherine | Green | 580 | 0 | Main Street | Dallas | TX | 75201 | Poor credit threshold |
+| TC014 | Daniel | Blue | 620 | 12345 | Broadway | New York | NY | 10001 | Fair credit threshold |
+| TC015 | Elena | Silver | 670 | Suite A | First Avenue | Richmond | VA | 23219 | Good credit threshold |
+| TC016 | Frank | Gold | 740 | PO Box 1 | Second Street | Salt Lake City | UT | 84101 | Excellent threshold |
+| TC017 | Grace | Copper | 299 | 1A | Third Road | Boise | ID | 83701 | Below minimum credit |
+| TC018 | Henry | Platinum | 851 | 123B | Fourth Lane | Hartford | CT | 06101 | Above maximum credit |
+| TC019 | Iris | Diamond | 579 | Apt Z | Fifth Circle | Nashville | TN | 37201 | Edge of poor credit |
+| TC020 | Jack | Ruby | 671 | Unit 999 | Sixth Drive | Louisville | KY | 40201 | Edge of good credit |
+
+## Negative Test Cases
+
+| Test ID | First Name | Last Name | Credit Score | House/Apt No | Street Address | City | State | Postal Code | Test Purpose |
+|---------|------------|-----------|--------------|--------------|----------------|------|-------|-------------|--------------|
+| TC021 | John123 | Doe | 700 | 123 | Main Street | Houston | TX | 77001 | Invalid first name (numbers) |
+| TC022 | Jane | O'Connor$ | 720 | 456 | Oak Lane | Phoenix | AZ | 85001 | Invalid last name (special char) |
+| TC023 | Mike | Smith | -100 | 789 | Pine Road | Denver | CO | 80202 | Negative credit score |
+| TC024 | Lisa | Jones | 999 | 321 | Elm Avenue | Seattle | WA | 98102 | Invalid high credit score |
+| TC025 | null | Wilson | 650 | 654 | Maple Drive | Portland | OR | 97202 | Null first name |
+| TC026 | Tom | null | 680 | 987 | Cedar Street | Austin | TX | 78702 | Null last name |
+| TC027 | Amy | Davis | null | 147 | Birch Lane | Miami | FL | 33102 | Null credit score |
+| TC028 | Steve | Miller | 720 | null | Willow Road | Chicago | IL | 60602 | Null house number |
+| TC029 | Kate | Taylor | 700 | 258 | null | Atlanta | GA | 30302 | Null street address |
+| TC030 | Paul | Anderson | 740 | 369 | Spruce Avenue | null | FL | 33103 | Nu
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
+
+Assignment 4:
+
+curl --location 'https://api.groq.com/openai/v1/chat/completions' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer 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' \
+--header 'Cookie: __cf_bm=Ue8_5V3QgxLT0W3ulQ6gmKO0O7q1Wagbpd_4HqoDWMM-1758168335-1.0.1.1-3ixY3WOsolPfQys.ZhRgNM2BUf4FCDaO48ZNUasucY3dBBFZSUG9h0PPwiieVJLgeN0y4FK8Pq_cjjEIxhOWF5od2gZjuZcNbfjXg98l7PM' \
+--data '{
+"model": "meta-llama/llama-4-scout-17b-16e-instruct",
+"messages": [{
+    "role": "user",
+    "content": "You are an expert in the credit card applications and has expertise in the payment domain and credit card application processing  \n\nInstructions: Generate test data in tabular format to apply for an credit card application\n\n       -Address should have House No Or appartment number , Postal Code, City Name and State .Use address with in USA.\n      - First Name and Last Name should not be biased on country, race,\n      - Use different range for credit score\n      - Don'\''t bias the test data on any format like  name\nExample\n     JVRao,Michelin, 789,18081 DeerPoint Court, Milton, GA-30040\n\nPersona: You are an expert Test Data Management Architect with deep knowledge in financial services testing, credit card systems, and enterprise-grade QA practices.\nOutput: covering normal, boundary, and negative scenarios.\nTone: Clear, professional, structured, and instructional — suitable for QA/Test Automation teams preparing enterprise-ready test data."
+
+}]
+}
+'
+
+
+Response:
+                "content": "**Test Data for Credit Card Application**\n=====================================\n\nThe following test data is designed to cover normal, boundary, and negative scenarios for credit card application testing.\n\n**Test Data Table**\n------------------\n\n| **First Name** | **Last Name** | **Credit Score** | **Address** | **Postal Code** | **City** | **State** |\n| --- | --- | --- | --- | --- | --- | --- |\n| JVRao | Michelin | 750 | 789, 18081 DeerPoint Court | 30040 | Milton | GA |\n| Emily | Chen | 620 | 456, 123 Main St | 10001 | New York | NY |\n| Rohan | Patel | 850 | 321, 678 Elm St | 94101 | San Francisco | CA |\n| Sophia | Lee | 580 | 901, 234 Oak St | 20001 | Washington | DC |\n| Ethan | Kim | 700 | 111, 345 Pine St | 60601 | Chicago | IL |\n| Olivia | Brown | 480 | 222, 567 Maple St | 90001 | Los Angeles | CA |\n| Ava | Davis | 780 | 333, 890 Cedar St | 40001 | Louisville | KY |\n| Liam | Martin | 680 | 444, 321 Cherry St | 50001 | Des Moines | IA |\n| Noah | Harris | 820 | 555, 901 Walnut St | 60001 | Evanston | IL |\n| Mia | Thompson | 540 | 666, 234 Spruce St | 70001 | New Orleans | LA |\n\n**Test Data Scenarios**\n----------------------\n\n### Normal Scenarios\n\n* Credit Score: 620-750 (Emily Chen, JVRao Michelin, Rohan Patel)\n* Address: Valid USA addresses with house numbers, postal codes, city, and state\n\n### Boundary Scenarios\n\n* Credit Score: 580-620 (Sophia Lee) - lower boundary\n* Credit Score: 750-780 (Ava Davis) - upper boundary\n* Address: Edge cases (e.g., PO Box, Apartment complex)\n\n### Negative Scenarios\n\n* Credit Score: <580 (Olivia Brown) - declined application\n* Credit Score: >850 (No valid test case, but can be used for extremely high scores)\n* Address: Invalid or non-USA addresses (e.g., missing postal code, invalid city)\n\n**Test Data Characteristics**\n-----------------------------\n\n* **First Name** and **Last Name**: Unbiased, diverse names from various cultures\n* **Credit Score**: Varied range to cover different credit profiles\n* **Address**: USA-based addresses with house numbers, postal codes, city, and state\n\n**Using this Test Data**\n-------------------------\n\n1. Use this test data to create test cases for credit card application processing.\n2. Modify the data as needed to accommodate specific testing requirements.\n3. Ensure that the test data covers various scenarios, including normal, boundary, and negative cases.\n\nBy utilizing this test data, QA/Test Automation teams can efficiently create comprehensive test cases to validate credit card application processing, ensuring a robust and reliable system."
+
+

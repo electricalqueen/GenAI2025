@@ -1,0 +1,59 @@
+
+Homework Assignment 2: 
+
+Integrate the prompt to your API (using postman) and confirm the response (json)
+
+Objective: You can integrate prompt + LLM API
+
+-------------------------------------------------------------------------------------------------------------------------
+Request:
+
+
+curl --location 'https://api.groq.com/openai/v1/chat/completions' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer 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' \
+--header 'Cookie: __cf_bm=ELahldEHXkjXSf7WUEGmq5VW.8.G052dS.mRRB5uve8-1758167435-1.0.1.1-P5tFPczNKLwbRtD.MdH34j_nfuvbNvpQhNtEFyYYlV6yrTm.2Gy8Uccqo2ej2bHPTcAeG9TvCAYfOeY1I_rNkQ28gglSdqqmKl5pU4XKSZM' \
+--data '{
+"model": "meta-llama/llama-4-scout-17b-16e-instruct",
+"messages": [{
+    "role": "user",
+    "content": "You are  test automation migration specialist who can migrate selenium java script to playwright using typescript using industry best pratices  .\\n\\nInstruction\\n\\nConvert my selenium tests which are written in java to Playwright test using typescript so that I should be able to run the playwright tests \\n\\n   - Use best locator strategies.\\n   - use page object model\\n   - Tests should run fast \\n   - tests should not be flaky\\n   - tests should be able to run on all desktop browsers irrespective of Operating systems\\n   - Use explict wait strategy\\n\\nSelenium Code:\\n\\nimport org.openqa.selenium.WebDriver;\\nimport org.openqa.selenium.chrome.ChromeDriver;\\nimport io.github.bonigarcia.wdm.WebDriverManager;\\n\\npublic class SeleniumExample {\\n    public static void main(String[] args) {\\n        // Setup ChromeDriver using WebDriverManager\\n        WebDriverManager.chromedriver().setup();\\n\\n        // Create WebDriver instance\\n        WebDriver driver = new ChromeDriver();\\n\\n        try {\\n            // Open a webpage\\n            driver.get(\\\"https://www.example.com\\\");\\n\\n            // Get and print the page title\\n            String pageTitle = driver.getTitle();\\n            System.out.println(\\\"Page Title: \\\" + pageTitle);\\n\\n            // Verify the title\\n            if (pageTitle.equals(\\\"Example Domain\\\")) {\\n                System.out.println(\\\"Test Passed!\\\");\\n            } else {\\n                System.out.println(\\\"Test Failed!\\\");\\n            }\\n        } finally {\\n            // Close the browser\\n            driver.quit();\\n        }\\n    }\\n}"
+}]
+}'
+
+
+
+Response:
+
+{
+    "id": "chatcmpl-55a281e7-c3bf-4f6c-98fe-c50a824de5e3",
+    "object": "chat.completion",
+    "created": 1758167435,
+    "model": "meta-llama/llama-4-scout-17b-16e-instruct",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "I'll help you migrate your Selenium test written in Java to Playwright test using TypeScript, following industry best practices.\n\nHere's the migrated code:\n\n**playwright.config.ts**\n```typescript\nimport { defineConfig } from '@playwright/test';\n\nexport default defineConfig({\n  // Use the chromium browser for testing\n  browserName: 'chromium',\n  // Run tests on all desktop browsers\n  browserTypes: ['chromium', 'webkit', 'firefox'],\n  // Run tests on Windows, macOS, and Linux\n  operatingSystems: ['win32', 'darwin', 'linux'],\n  // Set the base URL for tests\n  baseURL: 'https://www.example.com',\n  // Use the page object model\n  pageObjectModel: true,\n});\n```\n\n**example.page.ts** (Page Object)\n```typescript\nimport { Page } from '@playwright/test';\n\nexport class ExamplePage {\n  private page: Page;\n\n  constructor(page: Page) {\n    this.page = page;\n  }\n\n  // Use best locator strategies (e.g., data-test-id)\n  private get pageTitle(): string {\n    return this.page.locator('[data-test-id=\"page-title\"]').textContent();\n  }\n\n  async getPageTitle(): Promise<string> {\n    return this.pageTitle;\n  }\n}\n```\n\n**example.test.ts** (Test)\n```typescript\nimport { test, expect } from '@playwright/test';\nimport { ExamplePage } from './example.page';\n\ntest.describe('Example Test', () => {\n  let examplePage: ExamplePage;\n\n  test.beforeEach(async ({ page }) => {\n    examplePage = new ExamplePage(page);\n    await page.goto('https://www.example.com');\n  });\n\n  test('should have correct page title', async () => {\n    const pageTitle = await examplePage.getPageTitle();\n    expect(pageTitle).toBe('Example Domain');\n  });\n});\n```\n\n** Explicit Wait Strategy **\n\nIn Playwright, you can use the `waitFor` method to implement explicit waits. For example:\n```typescript\nawait examplePage.page.waitForSelector('[data-test-id=\"page-title\"]');\n```\nThis will wait for the element with the `data-test-id` attribute to be visible on the page.\n\n**Best Practices**\n\n* Use the `data-test-id` attribute for locator strategies.\n* Keep test data separate from test logic.\n* Use page objects to encapsulate test logic and improve readability.\n* Use explicit waits to ensure elements are present and visible on the page.\n\n**Run Tests**\n\nTo run the tests, use the following command:\n```bash\nnpx playwright test example.test.ts\n```\nThis will run the tests on the Chromium browser. You can also run tests on other browsers by specifying the `--browser` option:\n```bash\nnpx playwright test example.test.ts --browser=webkit\n```\n**Flaky Tests**\n\nTo minimize flaky tests, use explicit waits and ensure that your test logic is robust. If tests are still flaky, consider using a more reliable locator strategy or adjusting the test logic.\n\n**Fast Tests**\n\nPlaywright tests are designed to run fast. To optimize test performance, ensure that your test logic is efficient, and use explicit waits to minimize unnecessary waiting.\n\nI hope this helps you migrate your Selenium test to Playwright using TypeScript! Let me know if you have any questions or need further assistance."
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "queue_time": 0.187787195,
+        "prompt_tokens": 325,
+        "prompt_time": 0.027459626,
+        "completion_tokens": 688,
+        "completion_time": 2.133888091,
+        "total_tokens": 1013,
+        "total_time": 2.161347717
+    },
+    "usage_breakdown": null,
+    "system_fingerprint": "fp_5d3e4e58e1",
+    "x_groq": {
+        "id": "req_01k5df3zrdf8hvb3pyk99pg008"
+    },
+    "service_tier": "on_demand"
+}

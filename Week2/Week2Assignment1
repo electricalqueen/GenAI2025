@@ -1,0 +1,267 @@
+Homework Assignment 1: 
+
+- I am going to share to 2-3 plain selenium java code
+- You are going to write prompt to convert selenium to playwright typescript
+- Once you convert, you need to copy to this URL and run !
+
+https://try.playwright.tech/?l=playwright-test
+
+Hint: Use ICE POT framework to generate !!
+
+Note:
+
+- The selenium code should be working code
+
+https://github.com/TestLeafInc/TestLeafSeleniumTraining
+
+---------------------------------------------------------------------------------------------
+
+
+Context: You are  test automation migration specialist who can migrate selenium java script to playwright using typescript using industry best pratices   .
+
+Instruction
+
+Convert my selenium tests which are written in java to Playwright test using typescript so that I should be able to run the playwright tests 
+
+   - Use best locator strategies.
+   - use page object model
+   - Tests should run fast 
+   - tests should not be flaky
+   - tests should be able to run on all desktop browsers irrespective of Operating systems
+   - Use explict wait strategy
+
+
+Selenium Code:
+
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class SeleniumExample {
+    public static void main(String[] args) {
+        // Setup ChromeDriver using WebDriverManager
+        WebDriverManager.chromedriver().setup();
+
+        // Create WebDriver instance
+        WebDriver driver = new ChromeDriver();
+
+        try {
+            // Open a webpage
+            driver.get("https://www.example.com");
+
+            // Get and print the page title
+            String pageTitle = driver.getTitle();
+            System.out.println("Page Title: " + pageTitle);
+
+            // Verify the title
+            if (pageTitle.equals("Example Domain")) {
+                System.out.println("Test Passed!");
+            } else {
+                System.out.println("Test Failed!");
+            }
+        } finally {
+            // Close the browser
+            driver.quit();
+        }
+    }
+}
+
+
+Output :
+
+---------------------------------------------------------------------------------------------
+# Playwright Migration: Selenium Java to TypeScript
+
+I'll convert your Selenium Java test to Playwright TypeScript using industry best practices, including the Page Object Model and proper locator strategies.
+
+```typescript
+// playwright.config.ts
+import { PlaywrightTestConfig, devices } from '@playwright/test';
+
+const config: PlaywrightTestConfig = {
+  timeout: 30000,
+  retries: 1,
+  use: {
+    headless: true,
+    viewport: { width: 1280, height: 720 },
+    actionTimeout: 15000,
+    ignoreHTTPSErrors: true,
+    video: 'retain-on-failure',
+    screenshot: 'only-on-failure',
+    trace: 'retain-on-failure',
+  },
+  projects: [
+    {
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'] },
+    },
+    {
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
+    },
+    {
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] },
+    },
+  ],
+  reporter: [['html', { open: 'never' }]],
+};
+
+export default config;
+```
+
+```typescript
+// pages/ExamplePage.ts
+import { Page, Locator, expect } from '@playwright/test';
+
+export class ExamplePage {
+  readonly page: Page;
+
+  constructor(page: Page) {
+    this.page = page;
+  }
+
+  async navigate() {
+    await this.page.goto('https://www.example.com');
+  }
+
+  async getPageTitle(): Promise<string> {
+    return await this.page.title();
+  }
+
+  async verifyTitle(expectedTitle: string): Promise<void> {
+    await expect(this.page).toHaveTitle(expectedTitle);
+  }
+}
+```
+
+```typescript
+// tests/example.spec.ts
+import { test, expect } from '@playwright/test';
+import { ExamplePage } from '../pages/ExamplePage';
+
+test.describe('Example Domain Tests', () => {
+  test('should verify page title of example.com', async ({ page }) => {
+    const examplePage = new ExamplePage(page);
+    
+    // Navigate to the page
+    await examplePage.navigate();
+    
+    // Verify the page title
+    await examplePage.verifyTitle('Example Domain');
+    
+    // Additional verification by getting the title text
+    const pageTitle = await examplePage.getPageTitle();
+    console.log(`Page Title: ${pageTitle}`);
+    
+    // Explicit verification in test
+    expect(pageTitle).toBe('Example Domain');
+  });
+});
+```
+
+```typescript
+// package.json
+{
+  "name": "playwright-typescript-migration",
+  "version": "1.0.0",
+  "description": "Migrated Selenium tests to Playwright with TypeScript",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:chromium": "npx playwright test --project=chromium",
+    "test:firefox": "npx playwright test --project=firefox",
+    "test:webkit": "npx playwright test --project=webkit",
+    "test:ui": "npx playwright test --ui",
+    "test:debug": "npx playwright test --debug",
+    "report": "npx playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}
+```
+
+```json
+// tsconfig.json
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "commonjs",
+    "lib": ["ES2022", "DOM"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "rootDir": "./"
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules"]
+}
+```
+
+## Setup and Execution Instructions
+
+1. **Initialize the project:**
+   ```bash
+   npm init -y
+   ```
+
+2. **Install Playwright:**
+   ```bash
+   npm install @playwright/test
+   ```
+
+3. **Install TypeScript and types:**
+   ```bash
+   npm install typescript @types/node --save-dev
+   ```
+
+4. **Create the directory structure:**
+   ```
+   your-project/
+   ├── pages/
+   │   └── ExamplePage.ts
+   ├── tests/
+   │   └── example.spec.ts
+   ├── playwright.config.ts
+   ├── package.json
+   └── tsconfig.json
+   ```
+
+5. **Run the tests:**
+   ```bash
+   # Run tests on all browsers
+   npx playwright test
+   
+   # Run tests on a specific browser
+   npx playwright test --project=chromium
+   
+   # Run tests in UI mode
+   npx playwright test --ui
+   
+   # Generate and view HTML report
+   npx playwright show-report
+   ```
+
+## Key Improvements in the Playwright Migration
+
+1. **Cross-browser Compatibility**: The tests will run on Chromium, Firefox, and WebKit (Safari) as configured.
+
+2. **Automatic Waiting**: Playwright has built-in auto-waiting mechanisms that eliminate the need for explicit waits in most cases.
+
+3. **Page Object Model**: Implemented to separate page-specific code from test logic.
+
+4. **Robust Locators**: Playwright provides reliable locators that are less flaky than traditional Selenium locators.
+
+5. **Parallel Execution**: Playwright can run tests in parallel by default, making test execution faster.
+
+6. **Built-in Reporting**: Comprehensive HTML reports with traces, videos, and screenshots on failure.
+
+7. **Type Safety**: TypeScript provides compile-time error checking and better IDE support.
+
+This migration follows industry best practices and will result in faster, more reliable tests that work across all major desktop browsers.
+
