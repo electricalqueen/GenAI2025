@@ -1,0 +1,149 @@
+Home Assignments
+
+Build the following API requests
+
+a) Provide a user story from your project --> ask to convert into non-functional testcases--done
+b) Confirmation of the audio (recorded content of your voice) converted into correct text--done
+c) Provide captcha (OCR images) as base64 string from different site --> confirm their text--done
+
+Note: Test all these with different models. Check which one is providing better output
+
+Try to tweak temperature or top_p for these !!
+
+
+====================================================================================================
+Assignment 1: Non functional testcases from user story
+
+{
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are Manual Tester for banking application"
+    },
+    {
+      "role": "user",
+      "content": "Write non functional testcases for salesforce login userstory \\\"User Story: As a customer care representative, I want to take ownership of new cases and communicate with customers so that I can provide high-touch customer experiences.Acceptance Criteria:Ability to take ownership of cases from the queue.Email customers directly from the case page.Update case details such as status, subject, and description.\\\""
+    },
+    {
+      "role": "assistant",
+      "content": "The testcase format should be testcase id - step id - step description - expected result - status"
+    }
+  ],
+  "model": "llama-3.3-70b-versatile",
+ //"max_tokens": 500,
+  "temperature": 0.1 // use temp between 0.1 - 0.2 at max for coding. 
+  }
+
+  Response:
+{
+    "id": "chatcmpl-7757d72c-977a-4a8e-969a-fc2bb21aafc5",
+    "object": "chat.completion",
+    "created": 1757996670,
+    "model": "llama-3.3-70b-versatile",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "\n\nHere are some non-functional testcases for the salesforce login userstory:\n\n**Performance Testcases**\n\n1.1 - 1.1 - Login to salesforce with valid credentials and measure the response time - The response time should be less than 2 seconds - Not Started\n1.1 - 1.2 - Take ownership of 10 cases from the queue and measure the response time - The response time should be less than 5 seconds - Not Started\n1.1 - 1.3 - Update case details such as status, subject, and description for 10 cases and measure the response time - The response time should be less than 5 seconds - Not Started\n1.1 - 1.4 - Send emails to 10 customers directly from the case page and measure the response time - The response time should be less than 5 seconds - Not Started\n\n**Security Testcases**\n\n2.1 - 2.1 - Attempt to login to salesforce with invalid credentials and verify that access is denied - Access should be denied and an error message should be displayed - Not Started\n2.1 - 2.2 - Take ownership of a case from the queue and verify that the case is assigned to the correct user - The case should be assigned to the correct user - Not Started\n2.1 - 2.3 - Update case details such as status, subject, and description and verify that the changes are reflected in the case history - The changes should be reflected in the case history - Not Started\n2.1 - 2.4 - Send an email to a customer directly from the case page and verify that the email is sent securely - The email should be sent securely and the customer's email address should not be exposed - Not Started\n\n**Usability Testcases**\n\n3.1 - 3.1 - Login to salesforce and navigate to the case queue page - The case queue page should be displayed with a list of available cases - Not Started\n3.1 - 3.2 - Take ownership of a case from the queue and verify that the case details are displayed correctly - The case details should be displayed correctly - Not Started\n3.1 - 3.3 - Update case details such as status, subject, and description and verify that the changes are saved correctly - The changes should be saved correctly - Not Started\n3.1 - 3.4 - Send an email to a customer directly from the case page and verify that the email composition page is displayed correctly - The email composition page should be displayed correctly - Not Started\n\n**Compatibility Testcases**\n\n4.1 - 4.1 - Login to salesforce using different browsers (e.g. Chrome, Firefox, Safari) and verify that the application works as expected - The application should work as expected on all browsers - Not Started\n4.1 - 4.2 - Take ownership of a case from the queue using different devices (e.g. desktop, laptop, mobile) and verify that the application works as expected - The application should work as expected on all devices - Not Started\n4.1 - 4.3 - Update case details such as status, subject, and description using different browsers and devices and verify that the changes are saved correctly - The changes should be saved correctly on all browsers and devices - Not Started\n4.1 - 4.4 - Send an email to a customer directly from the case page using different browsers and devices and verify that the email is sent correctly - The email should be sent correctly on all browsers and devices - Not Started\n\n**Scalability Testcases**\n\n5.1 - 5.1 - Create 1000 cases in the queue and verify that the application can handle the load - The application should be able to handle the load and display all cases correctly - Not Started\n5.1 - 5.2 - Take ownership of 100 cases from the queue and verify that the application can handle the load - The application should be able to handle the load and assign all cases correctly - Not Started\n5.1 - 5.3 - Update case details such as status, subject, and description for 100 cases and verify that the application can handle the load - The application should be able to handle the load and save all changes correctly - Not Started\n5.1 - 5.4 - Send emails to 100 customers directly from the case page and verify that the application can handle the load - The application should be able to handle the load and send all emails correctly - Not Started\n\nNote: The status of each testcase is marked as \"Not Started\" and will be updated to \"Passed\" or \"Failed\" once the testing is completed."
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "queue_time": 0.183698941,
+        "prompt_tokens": 134,
+        "prompt_time": 0.017765065,
+        "completion_tokens": 958,
+        "completion_time": 2.016802855,
+        "total_tokens": 1092,
+        "total_time": 2.03456792
+    },
+    "usage_breakdown": null,
+    "system_fingerprint": "fp_2ddfbb0da0",
+    "x_groq": {
+        "id": "req_01k58c8n2bf39sthzfy9e18ar8"
+    },
+    "service_tier": "on_demand"
+}
+
+====================================================================================================
+Assignment 3: Captcha text extraction from image
+
+
+{
+  "model": "meta-llama/llama-4-scout-17b-16e-instruct",
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "Extract the text from this image and let the upper or lower cases stay as it is. Return only those characters"
+        },
+        {
+          "type": "image_url",
+          "image_url": { 
+            "url": "data:image/png;base64,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" 
+          },
+         "temperature": 0.1
+        }
+      ]
+    }
+   
+  ],
+  "max_tokens": 500
+}
+
+
+Response:
+{
+    "id": "chatcmpl-d1a953ee-6223-4412-bb7b-7e8697a748a9",
+    "object": "chat.completion",
+    "created": 1757992987,
+    "model": "meta-llama/llama-4-scout-17b-16e-instruct",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "W E W H"
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "queue_time": 0.209496029,
+        "prompt_tokens": 469,
+        "prompt_time": 0.016085208,
+        "completion_tokens": 5,
+        "completion_time": 0.011593828,
+        "total_tokens": 474,
+        "total_time": 0.027679036
+    },
+    "usage_breakdown": null,
+    "system_fingerprint": "fp_79da0e0073",
+    "x_groq": {
+        "id": "req_01k588ra70fcwt3y9f720gsbn2"
+    },
+    "service_tier": "on_demand"
+}
+    ==================================================================================
+
+Assignment 2: Generate a detailed business report on a given topic
+
+curl --location 'https://api.groq.com/openai/v1/audio/translations' \
+--header 'Content-Type: multipart/form-data' \
+--form 'file=@"/C:/Users/hiran/Downloads/sample-1.opus"' \
+--form 'model="whisper-large-v3"'
+
+Response:
+{
+    "text": " Thanks for watching!",
+    "x_groq": {
+        "id": "req_01k58ahfmzfhzvnrm5a5j6c3h9"
+    }
+}
+
