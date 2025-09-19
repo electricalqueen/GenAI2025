@@ -11,7 +11,7 @@ Request:
 
 curl --location 'https://api.groq.com/openai/v1/chat/completions' \
 --header 'Content-Type: application/json' \
---header 'Authorization: Bearer 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' \
+--header 'Authorization: Bearer gsk_mnh1RUPBYEsUQ9dGGzd' \
 --header 'Cookie: __cf_bm=ELahldEHXkjXSf7WUEGmq5VW.8.G052dS.mRRB5uve8-1758167435-1.0.1.1-P5tFPczNKLwbRtD.MdH34j_nfuvbNvpQhNtEFyYYlV6yrTm.2Gy8Uccqo2ej2bHPTcAeG9TvCAYfOeY1I_rNkQ28gglSdqqmKl5pU4XKSZM' \
 --data '{
 "model": "meta-llama/llama-4-scout-17b-16e-instruct",

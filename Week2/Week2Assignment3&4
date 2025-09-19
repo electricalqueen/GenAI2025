@@ -87,7 +87,7 @@ Assignment 4:
 
 curl --location 'https://api.groq.com/openai/v1/chat/completions' \
 --header 'Content-Type: application/json' \
---header 'Authorization: Bearer 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' \
+--header 'Authorization: Bearer gsk_mnh1RUPBYEsUQ9' \
 --header 'Cookie: __cf_bm=Ue8_5V3QgxLT0W3ulQ6gmKO0O7q1Wagbpd_4HqoDWMM-1758168335-1.0.1.1-3ixY3WOsolPfQys.ZhRgNM2BUf4FCDaO48ZNUasucY3dBBFZSUG9h0PPwiieVJLgeN0y4FK8Pq_cjjEIxhOWF5od2gZjuZcNbfjXg98l7PM' \
 --data '{
 "model": "meta-llama/llama-4-scout-17b-16e-instruct",
